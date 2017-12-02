@@ -41,6 +41,7 @@ while true:
     b['Used Memory'] = used_memory
     c =  time.time()
 
-metronome = json.dumps(a, b, c) 
+    metronome = json.dumps(a, b, c) 
 
-req = requests.post('http://elasticsearch:9200/index/name',data=metronome(item,'rb').read())
+    req = requests.post('http://elasticsearch:9200/index/name',data=metronome(item,'rb').read())
+    time.sleep(10)
