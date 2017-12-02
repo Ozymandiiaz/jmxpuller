@@ -6,6 +6,7 @@ from jpype import java
 from jpype import javax
 import os, sys, time
 import json
+import threading
 
 HOST='localhost'
 PORT=8386
@@ -15,8 +16,9 @@ PASS='mypass'
 URL = "service:jmx:rmi:///jndi/rmi://%s:%d/jmxrmi" % (HOST, PORT)
 jpype.startJVM("/System/Library/Frameworks/JavaVM.framework/Libraries/libjvm_compat.dylib")
 java.lang.System.out.println("JVM load OK")
-while true:
 
+
+def worker():
     jhash = java.util.HashMap()
     jarray=jpype.JArray(java.lang.String)([USER,PASS])
     jhash.put (javax.management.remote.JMXConnector.CREDENTIALS, jarray);
@@ -43,5 +45,8 @@ while true:
 
     metronome = json.dumps(a, b, c) 
 
-    req = requests.post('http://elasticsearch:9200/index/name',data=metronome(item,'rb').read())
-    time.sleep(10)
+results = []
+for item in metronome:
+    requests.post('http://elasticsearch:9200/index/name',data=metronome(item,'rb').read());
+
+
