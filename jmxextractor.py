@@ -1,4 +1,4 @@
-###JSCO DevOPS
+#### Yakob Yakov (R) GPU v3
 import datetime 
 from datetime import datetime
 import jpype
