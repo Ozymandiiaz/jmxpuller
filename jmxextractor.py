@@ -46,7 +46,7 @@ def worker():
     metronome = json.dumps(a, b, c) 
 
 results = []
-for item in metronome:
+for i in worker:
     requests.post('http://elasticsearch:9200/index/name',data=metronome(item,'rb').read());
 
 
